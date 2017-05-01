@@ -8,7 +8,6 @@ import datetime
 
 # Local Dependencies
 import time_reporter
-import pyexch
 
 
 def process_args():
@@ -26,8 +25,6 @@ def process_args():
     action = parser.add_mutually_exclusive_group( required=True )
     action.add_argument( '--csv',
         help='Format: date,M,T,W,R,F (empty col means 8-hours worked that day)' )
-    action.add_argument( '--exch', action='store_true',
-        help='Load data from Exchange' )
     action.add_argument( '--list-overdue', action='store_true',
         help='List overdue dates and exit' )
     defaults = { 'user': None,
@@ -50,9 +47,6 @@ def process_args():
         # prompt user for passwd
         prompt = "Enter passwd for '{0}':".format( args.user )
         args.passwd = getpass.getpass( prompt )
-#    # if no action specified, list-overdue dates
-#    if not args.csv or not args.exch :
-#        args.list_overdue = True
     return args
 
 
@@ -103,10 +97,6 @@ def run( args ):
     if args.csv:
         data = process_csv( args.csv )
         logging.debug( 'CSV data: {0}'.format( pprint.pformat( data ) ) )
-    elif args.exch:
-        pyex = pyexch.PyExch( pwd=args.passwd )
-        start_date = min( overdue.keys() )
-        data = pyex.weekly_hours_worked( datetime.datetime.combine( start_date, datetime.time() ) )
     # Walk through list of overdue dates
     for key in sorted( overdue ):
         logging.info( 'Overdue date: {0}'.format( key ) )
@@ -123,7 +113,7 @@ if __name__ == '__main__':
     logging.basicConfig( level=logging.INFO )
 #    for key in logging.Logger.manager.loggerDict:
 #        print(key)
-    for key in [ 'weblib', 'selection', 'grab', 'time_reporter', 'requests', 'ntlm_auth', 'exchangelib', 'future_stdlib' ] :
+    for key in [ 'weblib', 'selection', 'grab', 'time_reporter', 'requests', 'ntlm_auth', 'future_stdlib' ] :
         logging.getLogger(key).setLevel(logging.CRITICAL)
     args = process_args()
     if args.debug:

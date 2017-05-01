@@ -7,7 +7,6 @@ This is a complete re-write from original sources, but still, would not have bee
 * Python3
 * The following dependencies will be installed by *setup.sh*
   * Grab (https://pypi.python.org/pypi/grab)
-  * Exchangelib (https://pypi.python.org/pypi/exchangelib/)
 
 # Installation
 1. git clone https://github.com/ncsa/time_reporting.git
@@ -28,7 +27,7 @@ See also: http://stackoverflow.com/questions/21487278/ssl-error-installing-pycur
 # Usage
 ```
 usage: ptr.py [-h] [--user USER] [--pwdfile PWDFILE] [-n] [-q] [-d] [-o]
-              (--csv CSV | --exch | --list-overdue)
+              (--csv CSV | --list-overdue)
 
 SEOAA Positive Time Reporting tool.
 
@@ -42,28 +41,12 @@ optional arguments:
   -o, --once         Submit only one week, then exit.
   --csv CSV          Format: date,M,T,W,R,F (empty col means 8-hours worked
                      that day)
-  --exch             Load data from Exchange
   --list-overdue     List overdue dates and exit
 ```
 
 ## List overdue dates
 ```
 run.sh --list-overdue
-```
-
-## Submit overdue timesheets using data from Exchange
-```
-run.sh --exch
-```
-
-## Submit only one (oldest) overdue week
-```
-run.sh --exch -o 
-```
-
-## Check data without submitting (dry) run
-```
-run.sh --exch -n
 ```
 
 ## Submit overdue timesheets using data from CSV file
