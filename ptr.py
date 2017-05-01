@@ -29,6 +29,8 @@ def process_args():
         '(empty col means 8-hours worked that day)')
     action.add_argument('--list-overdue', action='store_true',
                         help='List overdue dates and exit')
+    action.add_argument('-f', '--five-day', action='store_true',
+                        help='Assume a five day work week.')
     defaults = {'user': None,
                 'pwdfile': None,
                 'passwd': None,
@@ -101,6 +103,10 @@ def run(args):
     if args.csv:
         data = process_csv(args.csv)
         logging.debug('CSV data: {0}'.format(pprint.pformat(data)))
+    if args.five_day:
+        data = {}
+        for key in sorted(overdue):
+            data[key] = [8,8,8,8,8]
     # Walk through list of overdue dates
     for key in sorted(overdue):
         logging.info('Overdue date: {0}'.format(key))
@@ -117,8 +123,6 @@ def run(args):
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
-#    for key in logging.Logger.manager.loggerDict:
-#        print(key)
     for key in ['weblib', 'selection', 'grab', 'time_reporter',
                 'requests', 'ntlm_auth', 'future_stdlib']:
         logging.getLogger(key).setLevel(logging.CRITICAL)
