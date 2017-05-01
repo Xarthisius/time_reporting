@@ -62,7 +62,7 @@ class Time_Reporter( object ):
         self.g.doc.set_input( 'USER', self.user )
         self.g.doc.set_input( 'PASSWORD', self.passwd )
         self._submit( last_page='LOGIN' )
-        self.g.doc.text_assert( 'View Time Reporting for ' )
+        self.g.doc.text_assert('Current Time Reports')
         self.logged_in = True
 
 
