@@ -9,7 +9,7 @@ This is a complete re-write from original sources, but still, would not have bee
   * Grab (https://pypi.python.org/pypi/grab)
 
 # Installation
-1. git clone https://github.com/ncsa/time_reporting.git
+1. git clone https://github.com/Xarthisius/time_reporting.git
 1. cd time_reporting
 1. ./setup.sh
 
@@ -42,6 +42,8 @@ optional arguments:
   --csv CSV          Format: date,M,T,W,R,F (empty col means 8-hours worked
                      that day)
   --list-overdue     List overdue dates and exit
+  -f, --five-day     Assume a five day work week.
+
 ```
 
 ## List overdue dates
